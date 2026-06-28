@@ -50,7 +50,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           permission-packages: read
 
-      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
 
@@ -86,7 +86,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           permission-packages: read
 
-      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
 
@@ -116,7 +116,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           permission-packages: read
 
-      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm install --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
 
