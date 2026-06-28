@@ -6,12 +6,15 @@ FROM node:26-alpine AS build
 RUN npm install -g pnpm@9.15.4
 WORKDIR /app
 ARG NODE_AUTH_TOKEN=
-COPY .npmrc package.json pnpm-lock.yaml ./
+COPY .npmrc package.json ./
 RUN --mount=type=secret,id=github_token \
-    export NODE_AUTH_TOKEN="${NODE_AUTH_TOKEN:-$(cat /run/secrets/github_token 2>/dev/null || true)}" \
-    && pnpm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}" \
-    && pnpm config set @jorisjonkers-dev:registry https://npm.pkg.github.com \
-    && pnpm install --frozen-lockfile
+    NODE_AUTH_TOKEN="${NODE_AUTH_TOKEN:-$(cat /run/secrets/github_token 2>/dev/null || true)}" \
+    && printf '%s\n' \
+        '@jorisjonkers-dev:registry=https://npm.pkg.github.com' \
+        "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" \
+        'always-auth=true' \
+        > ~/.npmrc \
+    && pnpm install --no-frozen-lockfile
 COPY . .
 ARG VITE_FARO_URL=https://faro.jorisjonkers.dev/collect
 RUN VITE_FARO_URL=${VITE_FARO_URL} pnpm build

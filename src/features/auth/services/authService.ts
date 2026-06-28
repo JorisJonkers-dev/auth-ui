@@ -11,7 +11,10 @@ import { z } from 'zod'
 import { useAuth } from '@/lib/vueWebCommons'
 
 type RegisterData = RegisterUserRequest
-type ClientResult<T> = { data: T; error: undefined } | { data: undefined; error: unknown }
+interface ClientResult<T> {
+  data: T | undefined
+  error: unknown | undefined
+}
 
 const messageResponseSchema = z
   .record(z.string(), z.string())
@@ -67,16 +70,26 @@ function apiOptions(): {
   }
 }
 
-async function unwrap<T>(result: Promise<ClientResult<T>>): Promise<T | undefined> {
+async function unwrap<T>(result: Promise<ClientResult<T>>): Promise<NonNullable<T>> {
   const response = await result
   if (response.error !== undefined) {
     throw response.error
   }
+  if (response.data == null) {
+    throw new Error('Missing response body')
+  }
   return response.data
 }
 
+async function unwrapVoid(result: Promise<ClientResult<unknown>>): Promise<void> {
+  const response = await result
+  if (response.error !== undefined) {
+    throw response.error
+  }
+}
+
 export async function register(data: RegisterData): Promise<void> {
-  await unwrap(registerRequest({ ...apiOptions(), body: data }))
+  await unwrapVoid(registerRequest({ ...apiOptions(), body: data }))
 }
 
 export async function enrollTotp(): Promise<TotpEnrollResponse> {
@@ -85,7 +98,7 @@ export async function enrollTotp(): Promise<TotpEnrollResponse> {
 }
 
 export async function verifyTotp(code: string): Promise<void> {
-  await unwrap(verifyTotpRequest({ ...apiOptions(), body: { code } }))
+  await unwrapVoid(verifyTotpRequest({ ...apiOptions(), body: { code } }))
 }
 
 export async function confirmEmail(token: string): Promise<MessageResponse> {
