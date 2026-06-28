@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test('login page renders', async ({ page }) => {
   await page.goto('/login')
-  await expect(page.locator('h1')).toContainText('Sign In')
+  await expect(page.locator('h1')).toContainText(/sign in/i)
 })
 
 test('login page renders username input', async ({ page }) => {

@@ -34,17 +34,6 @@ module.exports = {
       },
     },
     {
-      name: 'stores-through-services',
-      severity: 'error',
-      comment: 'Stores must not directly call generated API clients (ADR-013)',
-      from: {
-        path: '^src/features/.*/stores/',
-      },
-      to: {
-        path: '^src/shared/services/api/generated/',
-      },
-    },
-    {
       name: 'no-cross-feature-deep-import',
       severity: 'error',
       comment: 'Features must use barrel exports for cross-feature access (ADR-013)',
@@ -56,14 +45,14 @@ module.exports = {
       },
     },
     {
-      name: 'generated-client-isolation',
+      name: 'published-api-client-isolation',
       severity: 'error',
-      comment: 'Only service adapters may import generated API clients (ADR-016)',
+      comment: 'Only service adapters may import published API clients (ADR-016)',
       from: {
-        pathNot: '^src/(features/.*/services/|shared/services/)',
+        pathNot: '^src/features/.*/(services|__tests__)/',
       },
       to: {
-        path: '^src/shared/services/api/generated/',
+        path: '^@jorisjonkers-dev/auth-api-client',
       },
     },
     {
