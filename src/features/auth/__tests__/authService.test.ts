@@ -23,7 +23,14 @@ vi.mock('@/lib/vueWebCommons', () => ({
 }))
 
 const authService = await import('../services/authService')
-const { register, sessionLogin, confirmEmail, resendConfirmation, enrollTotp, verifyTotp } = authService
+const {
+  register,
+  sessionLogin,
+  confirmEmail,
+  resendConfirmation,
+  enrollTotp,
+  verifyTotp,
+} = authService
 
 function ok<T>(data: T): { data: T; error: undefined } {
   return { data, error: undefined }
@@ -90,8 +97,18 @@ describe('authService', () => {
     expect(result.totpRequired).toBe(true)
   })
 
+  it('sessionLogin rejects malformed client responses', async () => {
+    clientMocks.sessionLogin.mockResolvedValue(
+      ok({ success: 'yes', totpRequired: false }),
+    )
+
+    await expect(sessionLogin('alice', 'secret')).rejects.toThrow()
+  })
+
   it('confirmEmail calls GET with token parameter', async () => {
-    clientMocks.confirmEmail.mockResolvedValue(ok({ message: 'Email confirmed' }))
+    clientMocks.confirmEmail.mockResolvedValue(
+      ok({ message: 'Email confirmed' }),
+    )
 
     const result = await confirmEmail('abc-123')
 
@@ -103,7 +120,9 @@ describe('authService', () => {
   })
 
   it('resendConfirmation sends email via POST', async () => {
-    clientMocks.resendConfirmation.mockResolvedValue(ok({ message: 'Confirmation sent' }))
+    clientMocks.resendConfirmation.mockResolvedValue(
+      ok({ message: 'Confirmation sent' }),
+    )
 
     const result = await resendConfirmation('alice@example.com')
 
@@ -122,6 +141,12 @@ describe('authService', () => {
 
     expect(clientMocks.enroll).toHaveBeenCalledWith(commonOptions)
     expect(result.secret).toBe('ABCDEF')
+  })
+
+  it('enrollTotp rejects malformed client responses', async () => {
+    clientMocks.enroll.mockResolvedValue(ok({ secret: 'ABCDEF' }))
+
+    await expect(enrollTotp()).rejects.toThrow()
   })
 
   it('verifyTotp sends authenticated POST with CSRF header and code', async () => {
@@ -162,11 +187,21 @@ describe('authService', () => {
   })
 
   it('register throws on client error', async () => {
-    const errorData = { title: 'Bad Request', status: 400, detail: 'Invalid input' }
+    const errorData = {
+      title: 'Bad Request',
+      status: 400,
+      detail: 'Invalid input',
+    }
     clientMocks.register.mockResolvedValue(fail(errorData))
 
     await expect(
-      register({ username: 'x', email: 'x@x.com', firstName: 'Test', lastName: 'User', password: 'y' }),
+      register({
+        username: 'x',
+        email: 'x@x.com',
+        firstName: 'Test',
+        lastName: 'User',
+        password: 'y',
+      }),
     ).rejects.toEqual(errorData)
   })
 })

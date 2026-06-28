@@ -1,3 +1,4 @@
+import type { RegisterUserRequest } from '@jorisjonkers-dev/auth-api-client'
 import {
   confirmEmail as confirmEmailRequest,
   enroll as enrollTotpRequest,
@@ -5,24 +6,54 @@ import {
   resendConfirmation as resendConfirmationRequest,
   sessionLogin as sessionLoginRequest,
   verify as verifyTotpRequest,
-  type RegisterUserRequest,
-  type SessionLoginResponse as ApiSessionLoginResponse,
-  type TotpEnrollResponse,
 } from '@jorisjonkers-dev/auth-api-client'
+import { z } from 'zod'
 import { useAuth } from '@/lib/vueWebCommons'
 
 type RegisterData = RegisterUserRequest
-type MessageResponse = { message: string }
-type ClientResult<T> =
-  | { data: T; error: undefined }
-  | { data: undefined; error: unknown }
+type ClientResult<T> = { data: T; error: undefined } | { data: undefined; error: unknown }
+
+const messageResponseSchema = z
+  .record(z.string(), z.string())
+  .transform((data) => ({
+    message: data.message ?? '',
+  }))
+
+const totpEnrollResponseSchema = z.object({
+  qrUri: z.string(),
+  secret: z.string(),
+})
+
+const sessionUserResponseSchema = z.object({
+  email: z.string().optional(),
+  firstName: z.string().optional(),
+  id: z.string(),
+  lastName: z.string().optional(),
+  role: z.string(),
+  roles: z.array(z.string()).optional(),
+  username: z.string(),
+})
+
+const sessionLoginResponseSchema = z.object({
+  success: z.boolean(),
+  totpRequired: z.boolean(),
+  user: sessionUserResponseSchema.nullish(),
+})
+
+type MessageResponse = z.infer<typeof messageResponseSchema>
+type TotpEnrollResponse = z.infer<typeof totpEnrollResponseSchema>
+export type SessionLoginResponse = z.infer<typeof sessionLoginResponseSchema>
 
 function getCsrfToken(): string | null {
   const { getCsrfToken: csrf } = useAuth()
   return csrf()
 }
 
-function apiOptions(): { baseUrl: string; credentials: RequestCredentials; headers: Record<string, string> } {
+function apiOptions(): {
+  baseUrl: string
+  credentials: RequestCredentials
+  headers: Record<string, string>
+} {
   const headers: Record<string, string> = {}
   const csrf = getCsrfToken()
   if (csrf) {
@@ -36,18 +67,12 @@ function apiOptions(): { baseUrl: string; credentials: RequestCredentials; heade
   }
 }
 
-/* eslint-disable ts/consistent-type-assertions -- generated client result narrows by convention */
-async function unwrap<T>(result: Promise<ClientResult<T>>): Promise<T> {
+async function unwrap<T>(result: Promise<ClientResult<T>>): Promise<T | undefined> {
   const response = await result
   if (response.error !== undefined) {
     throw response.error
   }
-  return response.data as T
-}
-/* eslint-enable ts/consistent-type-assertions */
-
-function toMessageResponse(data: Record<string, string>): MessageResponse {
-  return { message: data.message ?? '' }
+  return response.data
 }
 
 export async function register(data: RegisterData): Promise<void> {
@@ -55,7 +80,8 @@ export async function register(data: RegisterData): Promise<void> {
 }
 
 export async function enrollTotp(): Promise<TotpEnrollResponse> {
-  return unwrap(enrollTotpRequest(apiOptions()))
+  const data = await unwrap(enrollTotpRequest(apiOptions()))
+  return totpEnrollResponseSchema.parse(data)
 }
 
 export async function verifyTotp(code: string): Promise<void> {
@@ -63,16 +89,20 @@ export async function verifyTotp(code: string): Promise<void> {
 }
 
 export async function confirmEmail(token: string): Promise<MessageResponse> {
-  const data = await unwrap(confirmEmailRequest({ ...apiOptions(), query: { token } }))
-  return toMessageResponse(data)
+  const data = await unwrap(
+    confirmEmailRequest({ ...apiOptions(), query: { token } }),
+  )
+  return messageResponseSchema.parse(data)
 }
 
-export async function resendConfirmation(email: string): Promise<MessageResponse> {
-  const data = await unwrap(resendConfirmationRequest({ ...apiOptions(), body: { email } }))
-  return toMessageResponse(data)
+export async function resendConfirmation(
+  email: string,
+): Promise<MessageResponse> {
+  const data = await unwrap(
+    resendConfirmationRequest({ ...apiOptions(), body: { email } }),
+  )
+  return messageResponseSchema.parse(data)
 }
-
-export type SessionLoginResponse = ApiSessionLoginResponse
 
 /**
  * Authenticates the user and creates a server-side session (SESSION cookie).
@@ -83,5 +113,11 @@ export async function sessionLogin(
   password: string,
   totpCode?: string,
 ): Promise<SessionLoginResponse> {
-  return unwrap(sessionLoginRequest({ ...apiOptions(), body: { username, password, ...(totpCode ? { totpCode } : {}) } }))
+  const data = await unwrap(
+    sessionLoginRequest({
+      ...apiOptions(),
+      body: { username, password, ...(totpCode ? { totpCode } : {}) },
+    }),
+  )
+  return sessionLoginResponseSchema.parse(data)
 }
