@@ -42,6 +42,15 @@ jobs:
 
       - uses: docker/setup-buildx-action@v4
 
+      - uses: actions/create-github-app-token@v2
+        id: package-token
+        continue-on-error: true
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-packages: read
+
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -62,4 +71,4 @@ jobs:
           cache-from: type=gha,scope=auth-ui
           cache-to: type=gha,mode=max,scope=auth-ui
           secrets: |
-            github_token=${{ secrets.GITHUB_TOKEN }}
+            github_token=${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
