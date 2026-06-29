@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+@import '@jorisjonkers-dev/vue-web-commons/theme.css';
+
+@source "../node_modules/@jorisjonkers-dev/vue-web-commons/dist/**/*.{js,vue,ts}";

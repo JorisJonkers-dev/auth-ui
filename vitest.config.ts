@@ -11,6 +11,7 @@ export default defineConfig({
   },
   test: {
     environment: 'jsdom',
+    fileParallelism: false,
     include: ['src/**/*.test.ts'],
     coverage: {
       provider: 'v8',

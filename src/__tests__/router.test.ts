@@ -14,6 +14,15 @@ vi.mock('@/lib/vueWebCommons', () => ({
   }),
 }))
 
+vi.mock('@/features/auth/services/authService', () => ({
+  confirmEmail: vi.fn(),
+  enrollTotp: vi.fn(),
+  register: vi.fn(),
+  resendConfirmation: vi.fn(),
+  sessionLogin: vi.fn(),
+  verifyTotp: vi.fn(),
+}))
+
 // Dynamic import after mock
 const { router } = await import('@/router/index')
 

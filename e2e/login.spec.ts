@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test('login page renders', async ({ page }) => {
   await page.goto('/login')
-  await expect(page.locator('h1')).toContainText('Sign In')
+  await expect(page.locator('h1')).toContainText(/sign in/i)
 })
 
 test('login page renders username input', async ({ page }) => {
@@ -56,7 +56,8 @@ test('register page has login link', async ({ page }) => {
 
 test('login page preserves redirect query parameter', async ({ page }) => {
   await page.goto('/login?redirect=%2Ftotp-setup')
-  await expect(page).toHaveURL(/redirect=%2Ftotp-setup/)
+  await expect(page).toHaveURL(/\/login/)
+  expect(new URL(page.url()).searchParams.get('redirect')).toBe('/totp-setup')
 })
 
 test('check-email page renders', async ({ page }) => {

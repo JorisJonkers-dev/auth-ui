@@ -1,11 +1,11 @@
-import type { AuthApi, ThemeApi, ThemeMode, User, UseThemeOptions } from '@extratoast/vue-web-commons'
+import type { AuthApi, ThemeApi, ThemeMode, User, UseThemeOptions } from '@jorisjonkers-dev/vue-web-commons'
 import {
   cookieCsrfTokenSource,
   useAuth as useCommonsAuth,
   useTheme as useCommonsTheme,
-} from '@extratoast/vue-web-commons'
+} from '@jorisjonkers-dev/vue-web-commons'
 
-export * from '@extratoast/vue-web-commons'
+export * from '@jorisjonkers-dev/vue-web-commons'
 
 const validRoles = ['ADMIN', 'USER', 'READONLY'] as const
 type PersonalStackRole = (typeof validRoles)[number]
