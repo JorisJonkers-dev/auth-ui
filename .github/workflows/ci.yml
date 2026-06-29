@@ -133,7 +133,7 @@ jobs:
 
   deploy-bundle:
     name: Deploy Bundle
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-bundle.yml@v0.8.0
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-bundle.yml@v0.8.1
     permissions:
       contents: read
       packages: write
