@@ -9,7 +9,8 @@ test('TOTP setup page requires authentication', async ({ page }) => {
 test('TOTP setup page renders heading', async ({ page }) => {
   await page.goto('/totp-setup')
   // Should redirect to login with redirect query parameter
-  await expect(page).toHaveURL(/\/login\?redirect=%2Ftotp-setup/)
+  await expect(page).toHaveURL(/\/login/)
+  expect(new URL(page.url()).searchParams.get('redirect')).toBe('/totp-setup')
 })
 
 test('TOTP setup page shows loading state initially', async ({ page }) => {

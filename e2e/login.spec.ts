@@ -56,7 +56,8 @@ test('register page has login link', async ({ page }) => {
 
 test('login page preserves redirect query parameter', async ({ page }) => {
   await page.goto('/login?redirect=%2Ftotp-setup')
-  await expect(page).toHaveURL(/redirect=%2Ftotp-setup/)
+  await expect(page).toHaveURL(/\/login/)
+  expect(new URL(page.url()).searchParams.get('redirect')).toBe('/totp-setup')
 })
 
 test('check-email page renders', async ({ page }) => {
