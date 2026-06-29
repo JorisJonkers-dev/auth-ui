@@ -15,8 +15,8 @@ importers:
         specifier: ^2.7.1
         version: 2.8.0
       '@jorisjonkers-dev/auth-api-client':
-        specifier: 0.2.0
-        version: 0.2.0
+        specifier: 0.2.1
+        version: 0.2.1
       '@jorisjonkers-dev/vue-web-commons':
         specifier: 0.4.0
         version: 0.4.0(@grafana/faro-web-sdk@2.8.0)(@grafana/faro-web-tracing@2.8.0)(@playwright/test@1.61.1)(@vitejs/plugin-vue@6.0.7(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(dependency-cruiser@17.4.3)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vitest@4.1.9)(vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))
@@ -668,11 +668,11 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@jorisjonkers-dev/auth-api-client@0.2.0':
-    resolution: {integrity: sha512-ebcIvAiLrO6CZllVr2L8dfkijjfMb0ihCJ8c2hsMTR4OTYvBMzrafj7JL9T6qNBlfveo3gR5o2YeKD7gd7XZRQ==}
+  '@jorisjonkers-dev/auth-api-client@0.2.1':
+    resolution: {integrity: sha512-WJuq5AzTpVccwQuR1xS0puueblWdmfjMtnfNbjUCqi3d3VCHAZr7PbcEfMfrq/ppNlhl0hmNpb6xb0dp93i7hg==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/auth-api-client/0.2.1/840f51722a7dee12528b597eb6c3c9a67319a6bd}
 
   '@jorisjonkers-dev/vue-web-commons@0.4.0':
-    resolution: {integrity: sha512-P9/84+CvVMDbFs8KDegjVGtTSZdZn07ZqkxrLpovzYyOjq66zOfPrIZbuaz2uIXKzWc+hhsM2GC+qzrmqiv9wg==}
+    resolution: {integrity: sha512-P9/84+CvVMDbFs8KDegjVGtTSZdZn07ZqkxrLpovzYyOjq66zOfPrIZbuaz2uIXKzWc+hhsM2GC+qzrmqiv9wg==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/vue-web-commons/0.4.0/f2d745133c83d905873eb02c3335926244b9e169}
     peerDependencies:
       '@grafana/faro-web-sdk': ^2.7.1
       '@grafana/faro-web-tracing': ^2.7.1
@@ -684,17 +684,6 @@ packages:
       vitest: ^4.0.0
       vue: ^3.5.35
       vue-router: ^5.1.0
-    peerDependenciesMeta:
-      '@playwright/test':
-        optional: true
-      '@vitejs/plugin-vue':
-        optional: true
-      dependency-cruiser:
-        optional: true
-      vite:
-        optional: true
-      vitest:
-        optional: true
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -4131,7 +4120,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@jorisjonkers-dev/auth-api-client@0.2.0':
+  '@jorisjonkers-dev/auth-api-client@0.2.1':
     dependencies:
       zod: 4.4.3
 
@@ -4139,15 +4128,14 @@ snapshots:
     dependencies:
       '@grafana/faro-web-sdk': 2.8.0
       '@grafana/faro-web-tracing': 2.8.0
-      pinia: 3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
-      vue: 3.5.39(typescript@6.0.3)
-      vue-router: 5.1.0(@vue/compiler-sfc@3.5.39)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
-    optionalDependencies:
       '@playwright/test': 1.61.1
       '@vitejs/plugin-vue': 6.0.7(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
       dependency-cruiser: 17.4.3
+      pinia: 3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
       vite: 8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0)
       vitest: 4.1.9(@opentelemetry/api@1.9.1)(@types/node@26.0.1)(@vitest/coverage-v8@4.1.9)(jsdom@29.1.1)(msw@2.14.6(@types/node@26.0.1)(typescript@6.0.3))(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))
+      vue: 3.5.39(typescript@6.0.3)
+      vue-router: 5.1.0(@vue/compiler-sfc@3.5.39)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
