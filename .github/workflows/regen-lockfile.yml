@@ -1,0 +1,40 @@
+name: Regen lockfile (temporary)
+on:
+  push:
+    branches: [feat/migrate-jorisjonkers]
+    paths: ["package.json"]
+permissions:
+  contents: write
+  packages: read
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@v2
+        id: tok
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/migrate-jorisjonkers
+          token: ${{ steps.tok.outputs.token }}
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: regenerate lockfile (metadata-only resolve)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm install --no-frozen-lockfile --lockfile-only
+      - name: commit + push (app token → triggers CI)
+        run: |
+          if ! git diff --quiet pnpm-lock.yaml; then
+            git config user.name "jorisjonkers.dev Agents[bot]"
+            git config user.email "noreply@jorisjonkers.dev"
+            git add pnpm-lock.yaml
+            git commit -m "chore: regenerate pnpm-lock.yaml for clean client versions"
+            git push origin HEAD:feat/migrate-jorisjonkers
+          else
+            echo "no lockfile change"
+          fi
