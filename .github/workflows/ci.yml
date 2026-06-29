@@ -52,7 +52,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: pnpm lint
 
@@ -88,7 +88,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: pnpm exec playwright install --with-deps
 
@@ -118,7 +118,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: pnpm stryker
 
@@ -147,7 +147,7 @@ jobs:
           push: false
           tags: ghcr.io/jorisjonkers-dev/auth-ui:ci-${{ github.sha }}
           secrets: |
-            github_token=${{ steps.package-token.outputs.token || secrets.GITHUB_TOKEN }}
+            github_token=${{ secrets.GITHUB_TOKEN }}
 
   pipeline-complete:
     name: Pipeline Complete
