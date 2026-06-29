@@ -1,0 +1,40 @@
+apiVersion: deployment.jorisjonkers.dev/v2
+kind: Deployment
+metadata:
+  name: auth-ui
+  labels:
+    app.kubernetes.io/part-of: auth
+spec:
+  services:
+    auth-ui:
+      image: ghcr.io/jorisjonkers-dev/auth-ui:${BUNDLE_VERSION}
+      namespace: auth-system
+      account: auth-ui
+      ports:
+        - name: http
+          containerPort: 80
+      placement:
+        site: enschede
+        nodeSelector:
+          kubernetes.io/arch: arm64
+      autoscaling:
+        minReplicas: 1
+        maxReplicas: 1
+      observability:
+        gatus:
+          - name: auth-ui
+            url: https://auth.jorisjonkers.dev/
+      routes:
+        - host: auth.jorisjonkers.dev
+          expose:
+            tier: public-frankfurt
+          rules:
+            - path: /
+              port: http
+              operation: prefix
+              auth:
+                scope: anonymous
+      safety:
+        gateOn:
+          - parity
+          - routeOrAuthChange

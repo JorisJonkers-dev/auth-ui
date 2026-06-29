@@ -4,6 +4,7 @@
   "version": "0.2.0",
   "private": true,
   "packageManager": "pnpm@9.15.4",
+  "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -23,7 +24,7 @@
     "@grafana/faro-web-sdk": "^2.7.1",
     "@grafana/faro-web-tracing": "^2.7.1",
     "@jorisjonkers-dev/auth-api-client": "0.2.1",
-    "@jorisjonkers-dev/vue-web-commons": "0.4.0",
+    "@jorisjonkers-dev/vue-web-commons": "0.4.1",
     "pinia": "^3.0.4",
     "primevue": "^4.5.5",
     "qrcode": "^1.5.4",
