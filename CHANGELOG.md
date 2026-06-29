@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.2.0...v0.3.0) (2026-06-29)
+
+
+### Features
+
+* apply auth-ui program sweep ([#3](https://github.com/JorisJonkers-dev/auth-ui/issues/3)) ([1cd1cdb](https://github.com/JorisJonkers-dev/auth-ui/commit/1cd1cdb61ff092d22bfaa8720309acca3fa7402c))
+
 ## [0.2.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.1.0...v0.2.0) (2026-06-29)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "@jorisjonkers-dev/auth-ui",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
