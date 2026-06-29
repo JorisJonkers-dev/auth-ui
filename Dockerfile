@@ -5,15 +5,14 @@ FROM node:26-alpine AS build
 # package.json instead of going through corepack's shim dance.
 RUN npm install -g pnpm@9.15.4
 WORKDIR /app
-ARG NODE_AUTH_TOKEN=
-COPY .npmrc package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=secret,id=github_token \
-    NODE_AUTH_TOKEN="${NODE_AUTH_TOKEN:-$(cat /run/secrets/github_token 2>/dev/null || true)}" \
+    NODE_AUTH_TOKEN="$(cat /run/secrets/github_token 2>/dev/null || true)" \
     && printf '%s\n' \
         '@jorisjonkers-dev:registry=https://npm.pkg.github.com' \
-        "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" \
-        > ~/.npmrc \
-    && pnpm install --frozen-lockfile
+        "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc \
+    && pnpm install --frozen-lockfile \
+    && rm -f .npmrc
 COPY . .
 ARG VITE_FARO_URL=https://faro.jorisjonkers.dev/collect
 RUN VITE_FARO_URL=${VITE_FARO_URL} pnpm build
