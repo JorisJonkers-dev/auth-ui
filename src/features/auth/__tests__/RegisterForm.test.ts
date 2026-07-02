@@ -32,8 +32,16 @@ function createTestRouter() {
     routes: [
       { path: '/', component: { template: '<div/>' } },
       { path: '/login', name: 'login', component: { template: '<div/>' } },
-      { path: '/register', name: 'register', component: { template: '<div/>' } },
-      { path: '/check-email', name: 'check-email', component: { template: '<div/>' } },
+      {
+        path: '/register',
+        name: 'register',
+        component: { template: '<div/>' },
+      },
+      {
+        path: '/check-email',
+        name: 'check-email',
+        component: { template: '<div/>' },
+      },
     ],
   })
 }
@@ -135,7 +143,16 @@ describe('registerForm', () => {
     await wrapper.find('form').trigger('submit')
     await wrapper.vm.$nextTick()
 
-    expect(mockRegister).toHaveBeenCalledWith('alice', 'alice@example.com', 'Alice', 'Smith', 'password123')
-    expect(pushSpy).toHaveBeenCalledWith({ name: 'check-email', query: { email: 'alice@example.com' } })
+    expect(mockRegister).toHaveBeenCalledWith(
+      'alice',
+      'alice@example.com',
+      'Alice',
+      'Smith',
+      'password123',
+    )
+    expect(pushSpy).toHaveBeenCalledWith({
+      name: 'check-email',
+      query: { email: 'alice@example.com' },
+    })
   })
 })

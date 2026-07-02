@@ -52,8 +52,16 @@ function createTestRouter() {
     routes: [
       { path: '/', name: 'home', component: { template: '<div/>' } },
       { path: '/login', name: 'login', component: { template: '<div/>' } },
-      { path: '/register', name: 'register', component: { template: '<div/>' } },
-      { path: '/totp-setup', name: 'totp-setup', component: { template: '<div/>' } },
+      {
+        path: '/register',
+        name: 'register',
+        component: { template: '<div/>' },
+      },
+      {
+        path: '/totp-setup',
+        name: 'totp-setup',
+        component: { template: '<div/>' },
+      },
     ],
   })
   return router
@@ -105,7 +113,9 @@ describe('loginForm', () => {
 
   it('renders the register link', () => {
     const wrapper = mountComponent()
-    expect(wrapper.find('a[href*="register"]').exists() || wrapper.text().includes('Register')).toBe(true)
+    expect(
+      wrapper.find('a[href*="register"]').exists() || wrapper.text().includes('Register'),
+    ).toBe(true)
   })
 
   it('shows TOTP input when totpRequired is true', async () => {
@@ -129,7 +139,10 @@ describe('loginForm', () => {
     const router = createTestRouter()
     const pinia = createPinia()
     setActivePinia(pinia)
-    await router.push({ path: '/login', query: { redirect: '/api/oauth2/authorize?client_id=abc' } })
+    await router.push({
+      path: '/login',
+      query: { redirect: '/api/oauth2/authorize?client_id=abc' },
+    })
     await router.isReady()
 
     const wrapper = mount(LoginForm, {
@@ -149,7 +162,10 @@ describe('loginForm', () => {
     const router = createTestRouter()
     const pinia = createPinia()
     setActivePinia(pinia)
-    await router.push({ path: '/login', query: { redirect: '/api/oauth2/authorize?client_id=x' } })
+    await router.push({
+      path: '/login',
+      query: { redirect: '/api/oauth2/authorize?client_id=x' },
+    })
     await router.isReady()
 
     const wrapper = mount(LoginForm, {
@@ -302,7 +318,10 @@ describe('loginForm', () => {
     const router = createTestRouter()
     const pinia = createPinia()
     setActivePinia(pinia)
-    await router.push({ path: '/login', query: { redirect: '/api/oauth2/authorize?client_id=x' } })
+    await router.push({
+      path: '/login',
+      query: { redirect: '/api/oauth2/authorize?client_id=x' },
+    })
     await router.isReady()
     mockSessionLogin.mockResolvedValue({ success: true, totpRequired: true })
 

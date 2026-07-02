@@ -1,4 +1,10 @@
-import type { AuthApi, ThemeApi, ThemeMode, User, UseThemeOptions } from '@jorisjonkers-dev/vue-web-commons'
+import type {
+  AuthApi,
+  ThemeApi,
+  ThemeMode,
+  User,
+  UseThemeOptions,
+} from '@jorisjonkers-dev/vue-web-commons'
 import {
   cookieCsrfTokenSource,
   useAuth as useCommonsAuth,

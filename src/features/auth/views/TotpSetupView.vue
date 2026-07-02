@@ -64,10 +64,19 @@ async function onVerify(code: string): Promise<void> {
         <span class="font-mono text-xs text-[var(--color-text-subtle)]"> ~/auth/totp-setup </span>
       </div>
 
-      <h1 class="mb-2 text-xl font-bold text-[var(--color-text-primary)]">Set up two-factor authentication</h1>
-      <p class="mb-6 text-sm text-[var(--color-text-muted)]">Protect your account with a TOTP authenticator app.</p>
+      <h1 class="mb-2 text-xl font-bold text-[var(--color-text-primary)]">
+        Set up two-factor authentication
+      </h1>
+      <p class="mb-6 text-sm text-[var(--color-text-muted)]">
+        Protect your account with a TOTP authenticator app.
+      </p>
 
-      <div v-if="isLoading" class="py-8 text-center font-mono text-sm text-[var(--color-text-muted)]">Loading...</div>
+      <div
+        v-if="isLoading"
+        class="py-8 text-center font-mono text-sm text-[var(--color-text-muted)]"
+      >
+        Loading...
+      </div>
 
       <div v-else-if="enrollError" class="py-8 text-center">
         <p class="text-sm text-red-400">{{ enrollError }}</p>

@@ -23,14 +23,12 @@ vi.mock('@/lib/vueWebCommons', () => ({
 }))
 
 const authService = await import('../services/authService')
-const {
-  register,
-  sessionLogin,
-  confirmEmail,
-  resendConfirmation,
-  enrollTotp,
-  verifyTotp,
-} = authService
+const register = authService.register
+const sessionLogin = authService.sessionLogin
+const confirmEmail = authService.confirmEmail
+const resendConfirmation = authService.resendConfirmation
+const enrollTotp = authService.enrollTotp
+const verifyTotp = authService.verifyTotp
 
 function ok<T>(data: T): { data: T; error: undefined } {
   return { data, error: undefined }
@@ -98,17 +96,13 @@ describe('authService', () => {
   })
 
   it('sessionLogin rejects malformed client responses', async () => {
-    clientMocks.sessionLogin.mockResolvedValue(
-      ok({ success: 'yes', totpRequired: false }),
-    )
+    clientMocks.sessionLogin.mockResolvedValue(ok({ success: 'yes', totpRequired: false }))
 
     await expect(sessionLogin('alice', 'secret')).rejects.toThrow()
   })
 
   it('confirmEmail calls GET with token parameter', async () => {
-    clientMocks.confirmEmail.mockResolvedValue(
-      ok({ message: 'Email confirmed' }),
-    )
+    clientMocks.confirmEmail.mockResolvedValue(ok({ message: 'Email confirmed' }))
 
     const result = await confirmEmail('abc-123')
 
@@ -120,9 +114,7 @@ describe('authService', () => {
   })
 
   it('resendConfirmation sends email via POST', async () => {
-    clientMocks.resendConfirmation.mockResolvedValue(
-      ok({ message: 'Confirmation sent' }),
-    )
+    clientMocks.resendConfirmation.mockResolvedValue(ok({ message: 'Confirmation sent' }))
 
     const result = await resendConfirmation('alice@example.com')
 

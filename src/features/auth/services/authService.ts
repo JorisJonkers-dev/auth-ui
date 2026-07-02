@@ -16,11 +16,9 @@ interface ClientResult<T> {
   error: unknown | undefined
 }
 
-const messageResponseSchema = z
-  .record(z.string(), z.string())
-  .transform((data) => ({
-    message: data.message ?? '',
-  }))
+const messageResponseSchema = z.record(z.string(), z.string()).transform((data) => ({
+  message: data.message ?? '',
+}))
 
 const totpEnrollResponseSchema = z.object({
   qrUri: z.string(),
@@ -102,18 +100,12 @@ export async function verifyTotp(code: string): Promise<void> {
 }
 
 export async function confirmEmail(token: string): Promise<MessageResponse> {
-  const data = await unwrap(
-    confirmEmailRequest({ ...apiOptions(), query: { token } }),
-  )
+  const data = await unwrap(confirmEmailRequest({ ...apiOptions(), query: { token } }))
   return messageResponseSchema.parse(data)
 }
 
-export async function resendConfirmation(
-  email: string,
-): Promise<MessageResponse> {
-  const data = await unwrap(
-    resendConfirmationRequest({ ...apiOptions(), body: { email } }),
-  )
+export async function resendConfirmation(email: string): Promise<MessageResponse> {
+  const data = await unwrap(resendConfirmationRequest({ ...apiOptions(), body: { email } }))
   return messageResponseSchema.parse(data)
 }
 

@@ -5,7 +5,16 @@ export default antfu(
     vue: true,
     typescript: true,
     formatters: false,
-    ignores: ['dist', 'node_modules', 'coverage', 'playwright-report', 'test-results', 'reports', '.stryker-tmp'],
+    ignores: [
+      'dist',
+      'node_modules',
+      'coverage',
+      'playwright-report',
+      'test-results',
+      'reports',
+      '.stryker-tmp',
+      '.github-workflows/**',
+    ],
   },
   {
     rules: {
