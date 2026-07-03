@@ -49,7 +49,9 @@ async function onResend(): Promise<void> {
   <div
     class="flex min-h-dvh items-center justify-center bg-surface-dark px-4 py-[max(1.5rem,env(safe-area-inset-top))]"
   >
-    <div class="w-full max-w-md space-y-5 rounded-xl border border-surface-border bg-surface-card p-8">
+    <div
+      class="w-full max-w-md space-y-5 rounded-xl border border-surface-border bg-surface-card p-8"
+    >
       <!-- Terminal-style header -->
       <div class="flex items-center gap-2">
         <div class="flex gap-1.5">
@@ -57,19 +59,27 @@ async function onResend(): Promise<void> {
           <div class="h-2.5 w-2.5 rounded-full bg-terminal-amber/60" />
           <div class="h-2.5 w-2.5 rounded-full bg-terminal-green/60" />
         </div>
-        <span class="font-mono text-xs text-[var(--color-text-subtle)]"> ~/auth/confirm-email </span>
+        <span class="font-mono text-xs text-[var(--color-text-subtle)]">
+          ~/auth/confirm-email
+        </span>
       </div>
 
       <!-- Loading state -->
       <template v-if="status === 'loading'">
-        <h1 class="text-2xl font-bold text-[var(--color-text-primary)]">Confirming your email...</h1>
-        <p class="text-sm text-[var(--color-text-muted)]">Please wait while we verify your confirmation link.</p>
+        <h1 class="text-2xl font-bold text-[var(--color-text-primary)]">
+          Confirming your email...
+        </h1>
+        <p class="text-sm text-[var(--color-text-muted)]">
+          Please wait while we verify your confirmation link.
+        </p>
       </template>
 
       <!-- Success state -->
       <template v-else-if="status === 'success'">
         <h1 class="text-2xl font-bold text-[var(--color-text-primary)]">Email confirmed!</h1>
-        <p class="text-sm text-[var(--color-text-muted)]">Your email has been confirmed. You can now sign in.</p>
+        <p class="text-sm text-[var(--color-text-muted)]">
+          Your email has been confirmed. You can now sign in.
+        </p>
         <router-link
           class="glow-accent block w-full rounded-md bg-accent px-4 py-2 text-center font-mono text-sm font-semibold text-white transition-colors hover:bg-accent-light"
           to="/login"
@@ -86,7 +96,9 @@ async function onResend(): Promise<void> {
         </p>
 
         <div class="space-y-3">
-          <p class="text-sm text-[var(--color-text-muted)]">Enter your email to receive a new confirmation link.</p>
+          <p class="text-sm text-[var(--color-text-muted)]">
+            Enter your email to receive a new confirmation link.
+          </p>
           <div>
             <input
               v-model="resendEmail"
@@ -121,7 +133,9 @@ async function onResend(): Promise<void> {
         </div>
 
         <p class="text-center text-sm text-[var(--color-text-muted)]">
-          <router-link class="font-medium text-accent-light hover:underline" to="/login"> Back to login </router-link>
+          <router-link class="font-medium text-accent-light hover:underline" to="/login">
+            Back to login
+          </router-link>
         </p>
       </template>
     </div>

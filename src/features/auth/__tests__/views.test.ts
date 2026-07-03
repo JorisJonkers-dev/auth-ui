@@ -42,9 +42,21 @@ function createTestRouter() {
     routes: [
       { path: '/', component: { template: '<div/>' } },
       { path: '/login', name: 'login', component: { template: '<div/>' } },
-      { path: '/register', name: 'register', component: { template: '<div/>' } },
-      { path: '/check-email', name: 'check-email', component: { template: '<div/>' } },
-      { path: '/confirm-email', name: 'confirm-email', component: { template: '<div/>' } },
+      {
+        path: '/register',
+        name: 'register',
+        component: { template: '<div/>' },
+      },
+      {
+        path: '/check-email',
+        name: 'check-email',
+        component: { template: '<div/>' },
+      },
+      {
+        path: '/confirm-email',
+        name: 'confirm-email',
+        component: { template: '<div/>' },
+      },
     ],
   })
 }

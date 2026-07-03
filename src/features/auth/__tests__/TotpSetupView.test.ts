@@ -32,8 +32,16 @@ function createTestRouter() {
     history: createWebHashHistory(),
     routes: [
       { path: '/', component: { template: '<div/>' } },
-      { path: '/totp-setup', name: 'totp-setup', component: { template: '<div/>' } },
-      { path: '/dashboard', name: 'dashboard', component: { template: '<div/>' } },
+      {
+        path: '/totp-setup',
+        name: 'totp-setup',
+        component: { template: '<div/>' },
+      },
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: { template: '<div/>' },
+      },
     ],
   })
 }
@@ -54,7 +62,10 @@ async function mountComponent() {
 
 describe('totpSetupView', () => {
   beforeEach(() => {
-    mockEnrollTotp.mockReset().mockResolvedValue({ secret: 'JBSWY3DPEHPK3PXP', qrUri: 'otpauth://totp/test' })
+    mockEnrollTotp.mockReset().mockResolvedValue({
+      secret: 'JBSWY3DPEHPK3PXP',
+      qrUri: 'otpauth://totp/test',
+    })
     mockVerifyTotp.mockReset().mockResolvedValue(undefined)
     sessionStorage.clear()
   })

@@ -36,7 +36,10 @@ function onSubmit(): void {
 <template>
   <form class="space-y-4" @submit.prevent="onSubmit">
     <div>
-      <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="totp-code">
+      <label
+        class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+        for="totp-code"
+      >
         6-digit code from your authenticator app
       </label>
       <input

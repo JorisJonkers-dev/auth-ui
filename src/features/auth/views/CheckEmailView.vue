@@ -30,7 +30,9 @@ async function onResend(): Promise<void> {
   <div
     class="flex min-h-dvh items-center justify-center bg-surface-dark px-4 py-[max(1.5rem,env(safe-area-inset-top))]"
   >
-    <div class="w-full max-w-md space-y-5 rounded-xl border border-surface-border bg-surface-card p-8">
+    <div
+      class="w-full max-w-md space-y-5 rounded-xl border border-surface-border bg-surface-card p-8"
+    >
       <!-- Terminal-style header -->
       <div class="flex items-center gap-2">
         <div class="flex gap-1.5">
@@ -56,7 +58,10 @@ async function onResend(): Promise<void> {
         {{ resendSuccess }}
       </p>
 
-      <p v-if="resendError" class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+      <p
+        v-if="resendError"
+        class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+      >
         {{ resendError }}
       </p>
 
@@ -70,7 +75,9 @@ async function onResend(): Promise<void> {
       </button>
 
       <p class="text-center text-sm text-[var(--color-text-muted)]">
-        <router-link class="font-medium text-accent-light hover:underline" to="/login"> Back to login </router-link>
+        <router-link class="font-medium text-accent-light hover:underline" to="/login">
+          Back to login
+        </router-link>
       </p>
     </div>
   </div>

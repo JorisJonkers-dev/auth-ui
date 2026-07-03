@@ -30,88 +30,38 @@ jobs:
 
   web-check:
     name: Web Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 9.15.4
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: |
-          pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
-
-      - run: pnpm lint
-
-      - run: pnpm typecheck
-
-      - run: 'pnpm test:coverage'
-
-      - run: pnpm depcruise
-
-      - run: pnpm build
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2
+    with:
+      package-manager: pnpm
+      install-command: pnpm install --no-frozen-lockfile
+      typecheck-command: pnpm typecheck
+      test-command: pnpm test:coverage
+      build-command: pnpm build
+      package-check-command: pnpm depcruise
+    secrets:
+      packages-token: '${{ secrets.GITHUB_TOKEN }}'
 
   e2e:
     name: E2E
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 9.15.4
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: |
-          pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
-
-      - run: pnpm exec playwright install --with-deps
-
-      - run: 'pnpm test:e2e'
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2
+    with:
+      package-manager: pnpm
+      install-command: pnpm install --no-frozen-lockfile
+      typecheck-command: pnpm typecheck
+      test-command: pnpm exec playwright install --with-deps && pnpm test:e2e
+    secrets:
+      packages-token: '${{ secrets.GITHUB_TOKEN }}'
 
   mutation:
     name: Mutation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 9.15.4
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: |
-          pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
-
-      - run: pnpm stryker
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2
+    with:
+      package-manager: pnpm
+      install-command: pnpm install --no-frozen-lockfile
+      typecheck-command: pnpm typecheck
+      test-command: pnpm stryker
+    secrets:
+      packages-token: '${{ secrets.GITHUB_TOKEN }}'
 
   docker-build:
     name: Docker Build

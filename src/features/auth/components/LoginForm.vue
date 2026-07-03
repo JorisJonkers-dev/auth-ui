@@ -186,9 +186,16 @@ async function onTotpSubmit(): Promise<void> {
 
     <!-- TOTP challenge step -->
     <template v-if="authStore.totpRequired">
-      <p class="text-sm text-[var(--color-text-muted)]">Enter the 6-digit code from your authenticator app.</p>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Enter the 6-digit code from your authenticator app.
+      </p>
       <div>
-        <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="totp-code"> Code </label>
+        <label
+          class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+          for="totp-code"
+        >
+          Code
+        </label>
         <input
           id="totp-code"
           ref="totpInput"
@@ -207,7 +214,10 @@ async function onTotpSubmit(): Promise<void> {
     <!-- Login step -->
     <template v-else>
       <div>
-        <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="username">
+        <label
+          class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+          for="username"
+        >
           Username
         </label>
         <input
@@ -224,7 +234,10 @@ async function onTotpSubmit(): Promise<void> {
       </div>
 
       <div>
-        <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="password">
+        <label
+          class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+          for="password"
+        >
           Password
         </label>
         <input
@@ -241,13 +254,21 @@ async function onTotpSubmit(): Promise<void> {
       </div>
     </template>
 
-    <p v-if="authStore.error" class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+    <p
+      v-if="authStore.error"
+      class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+    >
       {{ authStore.error }}
     </p>
 
     <!-- Resend confirmation when email not confirmed -->
-    <div v-if="isEmailNotConfirmed" class="space-y-3 rounded-md border border-surface-border bg-surface-elevated p-4">
-      <p class="text-sm text-[var(--color-text-muted)]">Enter your email to receive a new confirmation link.</p>
+    <div
+      v-if="isEmailNotConfirmed"
+      class="space-y-3 rounded-md border border-surface-border bg-surface-elevated p-4"
+    >
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Enter your email to receive a new confirmation link.
+      </p>
       <input
         v-model="resendEmail"
         class="block w-full rounded-md border border-surface-border bg-surface-dark px-3 py-2 font-mono text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-subtle)] focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
@@ -260,7 +281,10 @@ async function onTotpSubmit(): Promise<void> {
       >
         {{ resendSuccess }}
       </p>
-      <p v-if="resendError" class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+      <p
+        v-if="resendError"
+        class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+      >
         {{ resendError }}
       </p>
       <button
@@ -278,12 +302,20 @@ async function onTotpSubmit(): Promise<void> {
       class="glow-accent w-full rounded-md bg-accent px-4 py-2 font-mono text-sm font-semibold text-white transition-colors hover:bg-accent-light disabled:opacity-50"
       type="submit"
     >
-      {{ authStore.isLoading || sessionLoginLoading ? 'Verifying...' : authStore.totpRequired ? 'Verify' : 'Sign in' }}
+      {{
+        authStore.isLoading || sessionLoginLoading
+          ? 'Verifying...'
+          : authStore.totpRequired
+            ? 'Verify'
+            : 'Sign in'
+      }}
     </button>
 
     <p v-if="!authStore.totpRequired" class="text-center text-sm text-[var(--color-text-muted)]">
       Don't have an account?
-      <router-link class="font-medium text-accent-light hover:underline" to="/register"> Register </router-link>
+      <router-link class="font-medium text-accent-light hover:underline" to="/register">
+        Register
+      </router-link>
     </p>
   </form>
 </template>

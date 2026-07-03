@@ -87,7 +87,11 @@ describe('auth store', () => {
     })
 
     it('sets error on login failure with ProblemDetail', async () => {
-      mockApiSessionLogin.mockRejectedValue({ title: 'Unauthorized', status: 401, detail: 'Bad credentials' })
+      mockApiSessionLogin.mockRejectedValue({
+        title: 'Unauthorized',
+        status: 401,
+        detail: 'Bad credentials',
+      })
 
       const store = useAuthStore()
       await expect(store.login('alice', 'wrong')).rejects.toBeTruthy()
@@ -124,10 +128,16 @@ describe('auth store', () => {
     })
 
     it('sets error on registration failure', async () => {
-      mockApiRegister.mockRejectedValue({ title: 'Conflict', status: 409, detail: 'Username taken' })
+      mockApiRegister.mockRejectedValue({
+        title: 'Conflict',
+        status: 409,
+        detail: 'Username taken',
+      })
 
       const store = useAuthStore()
-      await expect(store.register('bob', 'bob@example.com', 'Test', 'User', 'pass')).rejects.toBeTruthy()
+      await expect(
+        store.register('bob', 'bob@example.com', 'Test', 'User', 'pass'),
+      ).rejects.toBeTruthy()
 
       expect(store.error).toBe('Username taken')
     })

@@ -38,7 +38,10 @@ async function onSubmit(): Promise<void> {
   try {
     const { username, email, firstName, lastName, password } = form.value
     await authStore.register(username, email, firstName, lastName, password)
-    await router.push({ name: 'check-email', query: { email: form.value.email } })
+    await router.push({
+      name: 'check-email',
+      query: { email: form.value.email },
+    })
   } catch {
     // error is set on the store
   }
@@ -63,7 +66,10 @@ async function onSubmit(): Promise<void> {
     <h1 class="text-2xl font-bold text-[var(--color-text-primary)]">Create account</h1>
 
     <div>
-      <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="username">
+      <label
+        class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+        for="username"
+      >
         Username
       </label>
       <input
@@ -80,7 +86,9 @@ async function onSubmit(): Promise<void> {
     </div>
 
     <div>
-      <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="email"> Email </label>
+      <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="email">
+        Email
+      </label>
       <input
         id="email"
         v-model="form.email"
@@ -96,7 +104,10 @@ async function onSubmit(): Promise<void> {
 
     <div class="flex gap-4">
       <div class="flex-1">
-        <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="firstName">
+        <label
+          class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+          for="firstName"
+        >
           First name
         </label>
         <input
@@ -112,7 +123,10 @@ async function onSubmit(): Promise<void> {
         </p>
       </div>
       <div class="flex-1">
-        <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="lastName">
+        <label
+          class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+          for="lastName"
+        >
           Last name
         </label>
         <input
@@ -130,7 +144,10 @@ async function onSubmit(): Promise<void> {
     </div>
 
     <div>
-      <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="password">
+      <label
+        class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+        for="password"
+      >
         Password
       </label>
       <input
@@ -147,7 +164,10 @@ async function onSubmit(): Promise<void> {
     </div>
 
     <div>
-      <label class="block font-mono text-xs font-medium text-[var(--color-text-muted)]" for="confirmPassword">
+      <label
+        class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
+        for="confirmPassword"
+      >
         Confirm password
       </label>
       <input
@@ -163,7 +183,10 @@ async function onSubmit(): Promise<void> {
       </p>
     </div>
 
-    <p v-if="authStore.error" class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400">
+    <p
+      v-if="authStore.error"
+      class="rounded-md border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-400"
+    >
       {{ authStore.error }}
     </p>
 
@@ -177,7 +200,9 @@ async function onSubmit(): Promise<void> {
 
     <p class="text-center text-sm text-[var(--color-text-muted)]">
       Already have an account?
-      <router-link class="font-medium text-accent-light hover:underline" to="/login"> Sign in </router-link>
+      <router-link class="font-medium text-accent-light hover:underline" to="/login">
+        Sign in
+      </router-link>
     </p>
   </form>
 </template>
