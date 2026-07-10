@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.0...v0.4.1) (2026-07-10)
+
+
+### Bug Fixes
+
+* **platform:** use apps-core layer (apps-stateless not in allowed set) ([#13](https://github.com/JorisJonkers-dev/auth-ui/issues/13)) ([798425e](https://github.com/JorisJonkers-dev/auth-ui/commit/798425ed62de001a02dd2c36b80f6bab215bded2))
+
 ## [0.4.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.3.0...v0.4.0) (2026-07-10)
 
 
