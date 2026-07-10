@@ -1,0 +1,24 @@
+apiVersion: deployment.jorisjonkers.dev/v2
+kind: Deployment
+metadata:
+  name: auth-ui
+spec:
+  schemaVersion: 0.16.0
+  namespace: auth-system
+  platform:
+    layer: apps-stateless
+  workloads:
+    - name: auth-ui
+      image: auth-ui
+      health:
+        path: /
+        port: 80
+        timeoutClass: stateless
+        mandatory: true
+      rollbackTargetRetention:
+        minimumDays: 90
+        acknowledged: true
+      routes:
+        - host: auth.jorisjonkers.dev
+          owner: auth-ui
+          authMode: anonymous
