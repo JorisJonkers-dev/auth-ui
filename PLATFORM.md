@@ -22,33 +22,33 @@ Review `out/scorecard.md` for any failures before committing.
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `platform/deployment.yml` | Deployment contract (v2): namespace, `platform.layer`, workloads, health, routes, rollback policy |
-| `platform/images.lock.json` | Digest-pinned image references (object form; no `:latest`) |
-| `platform/production.env` | Non-secret production environment values |
-| `platform/render-local.sh` | Local CI-parity render: validate → render → kubeconform → leak-scan → scorecard |
-| `.github/workflows/release.yml` | release-please with mandatory App token (no GITHUB_TOKEN fallback) |
-| `.github/workflows/publish.yml` | Tag-triggered image + deploy-artifact publish and registry PR |
-| `.github/workflows/deploy-preview.yml` | PR validation with sticky scorecard comment |
+| File                                   | Purpose                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `platform/deployment.yml`              | Deployment contract (v2): namespace, `platform.layer`, workloads, health, routes, rollback policy |
+| `platform/images.lock.json`            | Digest-pinned image references (object form; no `:latest`)                                        |
+| `platform/production.env`              | Non-secret production environment values                                                          |
+| `platform/render-local.sh`             | Local CI-parity render: validate → render → kubeconform → leak-scan → scorecard                   |
+| `.github/workflows/release.yml`        | release-please with mandatory App token (no GITHUB_TOKEN fallback)                                |
+| `.github/workflows/publish.yml`        | Tag-triggered image + deploy-artifact publish and registry PR                                     |
+| `.github/workflows/deploy-preview.yml` | PR validation with sticky scorecard comment                                                       |
 
 ## Readiness scorecard (SC-11)
 
 Every render evaluates these fields; `fail` blocks deployment, `not_applicable`
 means the check does not apply to this service:
 
-| Field | not_applicable when |
-|-------|---------------------|
-| `schema_pinned` | never |
-| `context_pinned` | never |
-| `no_latest_images` | never |
-| `health_declared` | never |
-| `route_owner_authmode_declared` | no workload declares routes |
-| `rollback_retention_acknowledged` | never |
-| `no_raw_secrets` | never |
-| `stateful_policy_declared` | all workloads are stateless |
-| `raw_manifests_guarded` | no workload enables rawManifests |
-| `npm_signatures_verified` | never |
+| Field                             | not_applicable when              |
+| --------------------------------- | -------------------------------- |
+| `schema_pinned`                   | never                            |
+| `context_pinned`                  | never                            |
+| `no_latest_images`                | never                            |
+| `health_declared`                 | never                            |
+| `route_owner_authmode_declared`   | no workload declares routes      |
+| `rollback_retention_acknowledged` | never                            |
+| `no_raw_secrets`                  | never                            |
+| `stateful_policy_declared`        | all workloads are stateless      |
+| `raw_manifests_guarded`           | no workload enables rawManifests |
+| `npm_signatures_verified`         | never                            |
 
 ## Reference
 
