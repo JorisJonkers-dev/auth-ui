@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.3.0...v0.4.0) (2026-07-10)
+
+
+### Features
+
+* **platform-deploy:** adopt deploy-platform publish flow ([60247cf](https://github.com/JorisJonkers-dev/auth-ui/commit/60247cfe81e7e59cf5a9d6054748fa3b8240ebbf))
+
 ## [0.3.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.2.0...v0.3.0) (2026-06-29)
 
 ### Features
