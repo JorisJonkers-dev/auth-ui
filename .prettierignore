@@ -7,3 +7,4 @@ reports
 .stryker-tmp
 .github-workflows/**
 pnpm-lock.yaml
+CHANGELOG.md
