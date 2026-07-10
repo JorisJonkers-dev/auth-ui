@@ -6,7 +6,7 @@ spec:
   schemaVersion: 0.16.0
   namespace: auth-system
   platform:
-    layer: apps-stateless
+    layer: apps-core
   workloads:
     - name: auth-ui
       image: auth-ui
