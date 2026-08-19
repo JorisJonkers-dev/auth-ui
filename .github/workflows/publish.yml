@@ -23,6 +23,10 @@ jobs:
   publish-image:
     uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@f6c2969d7f1f4555da3b2cf46ce6a9b364c471b3 # v0.12.0
     with:
+      # Restored: adopting the shared publish flow dropped the inline
+      # build-push-action's platforms value, so this fell back to the
+      # workflow's linux/amd64 default and the arm64 nodes could not pull.
+      platforms: linux/amd64,linux/arm64
       image-name: auth-ui
       version: ${{ github.ref_name }}
     permissions:
