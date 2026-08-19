@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.1...v0.4.2) (2026-08-19)
+
+
+### Bug Fixes
+
+* **ci:** restore the arm64 image build ([#16](https://github.com/JorisJonkers-dev/auth-ui/issues/16)) ([0824ed9](https://github.com/JorisJonkers-dev/auth-ui/commit/0824ed9894b4f9c69957c4b954f34410914c9ae8))
+
 ## [0.4.1](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.0...v0.4.1) (2026-07-10)
 
 
