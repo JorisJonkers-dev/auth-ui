@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.2...v0.4.3) (2026-08-19)
+
+
+### Bug Fixes
+
+* **ci:** bump the reusable workflow pins so job timeouts apply ([#20](https://github.com/JorisJonkers-dev/auth-ui/issues/20)) ([bfdb41d](https://github.com/JorisJonkers-dev/auth-ui/commit/bfdb41de874fe19f092cbabbbd760129e33d5d88))
+
 ## [0.4.2](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.1...v0.4.2) (2026-08-19)
 
 
