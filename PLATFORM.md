@@ -3,8 +3,22 @@
 ## Quick start: local validate
 
 ```bash
-./platform/render-local.sh --scorecard-only
+./platform/render-local.sh
 ```
+
+Requires `node`, plus either `oras` (to pull the cluster context by digest) or
+`--context-dir` pointing at an already-pulled context package. Installing the
+pinned toolkit reads `npm.pkg.github.com`, which needs a token even for public
+packages:
+
+```bash
+export GITHUB_TOKEN="$(gh auth token)"
+```
+
+The check runs `@jorisjonkers-dev/deploy-check`, the same code the
+`deploy-preview` action runs, so a local result and a CI result agree. The
+schema version and context ref are read from this repository's workflows rather
+than restated in the script.
 
 Review `out/scorecard.md` for any failures before committing.
 
@@ -12,7 +26,7 @@ Review `out/scorecard.md` for any failures before committing.
 
 ## Full deployment flow
 
-1. **Local validate** — `./platform/render-local.sh --scorecard-only`; all scorecard fields must pass (or be `not_applicable`).
+1. **Local validate** — `./platform/render-local.sh`; all scorecard fields must pass (or be `not_applicable`).
 2. **Tag release** — merge to `main`; release-please opens a release PR; merging it pushes a `v*.*.*` tag.
 3. **Automated publish** — `publish.yml` runs on the tag: builds the image → locks the image digest →
    publishes the deploy artifact to GHCR → opens a registry PR in homelab-deploy.
