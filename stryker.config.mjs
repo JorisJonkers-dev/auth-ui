@@ -3,16 +3,23 @@ const config = {
   // Stryker's `break` defaults to null, which means the mutation score never
   // fails the build -- so the required Mutation Tests check could only fail if
   // Stryker itself errored, not if the score collapsed. The floor is set just
-  // under the current score (51.00% over ~163 mutants) so it catches a
+  // under the current score (67.86% with static mutants included) so it catches a
   // regression without demanding an immediate improvement. Raise it as the
   // score rises; never lower it to make a red build green.
-  thresholds: { high: 80, low: 60, break: 48 },
+  thresholds: { high: 80, low: 60, break: 62 },
   mutate: ['src/**/*.ts', '!src/**/*.test.ts'],
-  ignoreStatic: true,
+  // A zod schema, a route table or a config object is built when its module is
+  // imported, so its mutants are static. With ignoreStatic and perTest, Stryker
+  // attributes that module-load execution to whichever test happened to import
+  // it first and runs only that one, so the schema tests never ran against the
+  // schema mutants: loginSchema scored 0% and registerSchema 10.71% while both
+  // had full line coverage. Running every test per mutant fixes the attribution
+  // and costs about a minute for this repository.
+  ignoreStatic: false,
   plugins: ['@stryker-mutator/vitest-runner'],
   testRunner: 'vitest',
   reporters: ['html', 'clear-text', 'progress'],
-  coverageAnalysis: 'perTest',
+  coverageAnalysis: 'all',
   vitest: {
     configFile: 'vitest.config.ts',
   },
