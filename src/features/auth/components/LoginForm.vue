@@ -251,6 +251,11 @@ async function onTotpSubmit(): Promise<void> {
         <p v-if="fieldErrors.password" class="mt-1 text-sm text-red-400">
           {{ fieldErrors.password }}
         </p>
+        <p class="mt-2 text-right text-sm">
+          <router-link class="font-medium text-accent-light hover:underline" to="/forgot-password">
+            Forgot password?
+          </router-link>
+        </p>
       </div>
     </template>
 
