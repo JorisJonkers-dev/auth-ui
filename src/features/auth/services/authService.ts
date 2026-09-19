@@ -14,6 +14,7 @@ type RegisterData = RegisterUserRequest
 interface ClientResult<T> {
   data: T | undefined
   error: unknown | undefined
+  response?: Response
 }
 
 const messageResponseSchema = z.record(z.string(), z.string()).transform((data) => ({
@@ -68,10 +69,34 @@ function apiOptions(): {
   }
 }
 
+// A request rejected by a servlet filter carries no ProblemDetail body, so the
+// status is the only thing the user can be told. Reporting it beats the blanket
+// "Login failed" that hid a 401 from the resource-server filter.
+function problemFromStatus(response: Response): unknown {
+  return {
+    type: 'about:blank',
+    title: response.statusText || 'Request failed',
+    status: response.status,
+    detail: `The server rejected the request with status ${response.status}.`,
+  }
+}
+
+function rejectionOf(result: ClientResult<unknown>): unknown {
+  const { error, response } = result
+  const hasProblemBody = typeof error === 'object' && error !== null && 'status' in error
+  if (hasProblemBody) return error
+  if (response !== undefined && !response.ok) return problemFromStatus(response)
+  return error ?? new Error('Missing response body')
+}
+
+function isRejected(result: ClientResult<unknown>): boolean {
+  return result.error !== undefined || (result.response !== undefined && !result.response.ok)
+}
+
 async function unwrap<T>(result: Promise<ClientResult<T>>): Promise<NonNullable<T>> {
   const response = await result
-  if (response.error !== undefined) {
-    throw response.error
+  if (isRejected(response)) {
+    throw rejectionOf(response)
   }
   if (response.data == null) {
     throw new Error('Missing response body')
@@ -81,8 +106,8 @@ async function unwrap<T>(result: Promise<ClientResult<T>>): Promise<NonNullable<
 
 async function unwrapVoid(result: Promise<ClientResult<unknown>>): Promise<void> {
   const response = await result
-  if (response.error !== undefined) {
-    throw response.error
+  if (isRejected(response)) {
+    throw rejectionOf(response)
   }
 }
 
