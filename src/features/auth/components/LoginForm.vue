@@ -218,14 +218,14 @@ async function onTotpSubmit(): Promise<void> {
           class="block font-mono text-xs font-medium text-[var(--color-text-muted)]"
           for="username"
         >
-          Username
+          Username or email
         </label>
         <input
           id="username"
           v-model="form.username"
           autocomplete="username"
           class="mt-1 block w-full rounded-md border border-surface-border bg-surface-elevated px-3 py-2 font-mono text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-subtle)] focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-          placeholder="your-username"
+          placeholder="your-username or you@example.com"
           type="text"
         />
         <p v-if="fieldErrors.username" class="mt-1 text-sm text-red-400">

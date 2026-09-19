@@ -104,6 +104,15 @@ describe('loginForm', () => {
     expect(wrapper.find('#password').exists()).toBe(true)
   })
 
+  // The API accepts either identifier; a field labelled "Username" is what sent
+  // a user round twelve failed attempts with an autofilled email address.
+  it('labels the identifier field as username or email', () => {
+    const wrapper = mountComponent()
+    const label = wrapper.find('label[for="username"]')
+    expect(label.text()).toBe('Username or email')
+    expect(wrapper.find('#username').attributes('placeholder')).toContain('@')
+  })
+
   it('shows validation error when submitting empty form', async () => {
     const wrapper = mountComponent()
     await wrapper.find('form').trigger('submit')
