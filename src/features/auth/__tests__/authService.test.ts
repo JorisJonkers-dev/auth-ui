@@ -5,6 +5,8 @@ const clientMocks = vi.hoisted(() => ({
   sessionLogin: vi.fn(),
   confirmEmail: vi.fn(),
   resendConfirmation: vi.fn(),
+  forgotPassword: vi.fn(),
+  resetPassword: vi.fn(),
   enroll: vi.fn(),
   verify: vi.fn(),
 }))
@@ -27,6 +29,8 @@ const register = authService.register
 const sessionLogin = authService.sessionLogin
 const confirmEmail = authService.confirmEmail
 const resendConfirmation = authService.resendConfirmation
+const forgotPassword = authService.forgotPassword
+const resetPassword = authService.resetPassword
 const enrollTotp = authService.enrollTotp
 const verifyTotp = authService.verifyTotp
 
@@ -72,6 +76,36 @@ describe('authService', () => {
         password: 'pass1234',
       },
     })
+  })
+
+  it('forgotPassword posts the email and returns the message', async () => {
+    clientMocks.forgotPassword.mockResolvedValue(ok({ message: 'sent' }))
+
+    const result = await forgotPassword('bob@example.com')
+
+    expect(clientMocks.forgotPassword).toHaveBeenCalledWith({
+      ...commonOptions,
+      body: { email: 'bob@example.com' },
+    })
+    expect(result.message).toBe('sent')
+  })
+
+  it('resetPassword posts the token and the new password', async () => {
+    clientMocks.resetPassword.mockResolvedValue(ok({ message: 'reset' }))
+
+    const result = await resetPassword('token-1', 'pass1234')
+
+    expect(clientMocks.resetPassword).toHaveBeenCalledWith({
+      ...commonOptions,
+      body: { token: 'token-1', newPassword: 'pass1234' },
+    })
+    expect(result.message).toBe('reset')
+  })
+
+  it('resetPassword propagates a client error', async () => {
+    clientMocks.resetPassword.mockResolvedValue(fail({ detail: 'expired' }))
+
+    await expect(resetPassword('stale', 'pass1234')).rejects.toEqual({ detail: 'expired' })
   })
 
   it('sessionLogin sends credentials with cookies include', async () => {

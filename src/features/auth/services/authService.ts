@@ -2,8 +2,10 @@ import type { RegisterUserRequest } from '@jorisjonkers-dev/auth-api-client'
 import {
   confirmEmail as confirmEmailRequest,
   enroll as enrollTotpRequest,
+  forgotPassword as forgotPasswordRequest,
   register as registerRequest,
   resendConfirmation as resendConfirmationRequest,
+  resetPassword as resetPasswordRequest,
   sessionLogin as sessionLoginRequest,
   verify as verifyTotpRequest,
 } from '@jorisjonkers-dev/auth-api-client'
@@ -101,6 +103,16 @@ export async function verifyTotp(code: string): Promise<void> {
 
 export async function confirmEmail(token: string): Promise<MessageResponse> {
   const data = await unwrap(confirmEmailRequest({ ...apiOptions(), query: { token } }))
+  return messageResponseSchema.parse(data)
+}
+
+export async function forgotPassword(email: string): Promise<MessageResponse> {
+  const data = await unwrap(forgotPasswordRequest({ ...apiOptions(), body: { email } }))
+  return messageResponseSchema.parse(data)
+}
+
+export async function resetPassword(token: string, newPassword: string): Promise<MessageResponse> {
+  const data = await unwrap(resetPasswordRequest({ ...apiOptions(), body: { token, newPassword } }))
   return messageResponseSchema.parse(data)
 }
 

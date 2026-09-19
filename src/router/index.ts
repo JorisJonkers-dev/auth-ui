@@ -35,6 +35,18 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: false },
   },
   {
+    path: '/forgot-password',
+    name: 'forgot-password',
+    component: () => import('@/features/auth/views/ForgotPasswordView.vue'),
+    meta: { requiresAuth: false },
+  },
+  {
+    path: '/reset-password',
+    name: 'reset-password',
+    component: () => import('@/features/auth/views/ResetPasswordView.vue'),
+    meta: { requiresAuth: false },
+  },
+  {
     path: '/totp-setup',
     name: 'totp-setup',
     component: () => import('@/features/auth/views/TotpSetupView.vue'),
