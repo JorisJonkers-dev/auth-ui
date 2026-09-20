@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.4...v0.5.0) (2026-09-19)
+
+
+### Features
+
+* **auth:** reset a forgotten password from the sign-in page ([#42](https://github.com/JorisJonkers-dev/auth-ui/issues/42)) ([ba4f381](https://github.com/JorisJonkers-dev/auth-ui/commit/ba4f3815f7bec6fdbd32de27599626483274148b))
+
 ## [0.4.4](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.3...v0.4.4) (2026-08-27)
 
 
