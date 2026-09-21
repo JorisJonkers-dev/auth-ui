@@ -15,8 +15,8 @@ importers:
         specifier: ^2.7.1
         version: 2.8.0
       '@jorisjonkers-dev/auth-api-client':
-        specifier: 0.8.0
-        version: 0.8.0
+        specifier: 0.9.0
+        version: 0.9.0
       '@jorisjonkers-dev/vue-web-commons':
         specifier: 0.4.1
         version: 0.4.1(@grafana/faro-web-sdk@2.8.0)(@grafana/faro-web-tracing@2.8.0)(@playwright/test@1.61.1)(@vitejs/plugin-vue@6.0.7(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(dependency-cruiser@17.4.3)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vitest@4.1.9)(vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(vite@8.1.0(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))
@@ -668,8 +668,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@jorisjonkers-dev/auth-api-client@0.8.0':
-    resolution: {integrity: sha512-an69ugI5WcasRtfQnNr6phnLUaOX9pN3Gsa7POuva1dxIXSFGuyDZqlVqXGZIvJr2wzcEt3RSB3oKr7X32suJw==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/auth-api-client/0.8.0/106a3232f5c7ab03082b782622dda36206c2e67b}
+  '@jorisjonkers-dev/auth-api-client@0.9.0':
+    resolution: {integrity: sha512-eHMrIp2eVirh68mq39eFE5yxiMDDJeFjGKhSNGDPfWr59gzesnvVpE3V9ONOHYsufP3WA+IQExcMW4MipNdV8w==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/auth-api-client/0.9.0/90f55adaf6cf8bec7a8d0a9335dd8a545192f1c2}
 
   '@jorisjonkers-dev/vue-web-commons@0.4.1':
     resolution: {integrity: sha512-CItc779tLy5RmOz9Ql7jdrCtRR+p65PoFZZwSDr42lTDaZL3ASnylnSVQyYJkgpK37xyLn+9FRPVNWLJ/ROq8A==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/vue-web-commons/0.4.1/0aad362b8c36b5140e314d14534b988a26ef5244}
@@ -4131,7 +4131,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@jorisjonkers-dev/auth-api-client@0.8.0':
+  '@jorisjonkers-dev/auth-api-client@0.9.0':
     dependencies:
       zod: 4.4.3
 
