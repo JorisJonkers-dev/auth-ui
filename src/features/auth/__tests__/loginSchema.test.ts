@@ -58,7 +58,7 @@ describe('loginSchema', () => {
     expect(result.success).toBe(false)
     if (!result.success) {
       expect(result.error.issues.find((i) => i.path.includes('username'))?.message).toBe(
-        'Username is required',
+        'Username or email is required',
       )
     }
   })
