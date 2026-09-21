@@ -205,6 +205,21 @@ describe('authService', () => {
     await expect(sessionLogin('alice', 'wrong')).rejects.toEqual(errorData)
   })
 
+  it('sessionLogin reports the status when a filter rejects the request without a body', async () => {
+    // The resource-server filter answers a stale bearer token with a bodyless
+    // 401, so the client reports no error payload at all.
+    clientMocks.sessionLogin.mockResolvedValue({
+      data: undefined,
+      error: undefined,
+      response: new Response(null, { status: 401, statusText: 'Unauthorized' }),
+    })
+
+    await expect(sessionLogin('alice', 'correct-password')).rejects.toMatchObject({
+      status: 401,
+      detail: 'The server rejected the request with status 401.',
+    })
+  })
+
   it('confirmEmail throws on client error', async () => {
     const errorData = { title: 'Gone', status: 410 }
     clientMocks.confirmEmail.mockResolvedValue(fail(errorData))
