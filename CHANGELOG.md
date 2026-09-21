@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.5.0...v0.6.0) (2026-09-21)
+
+
+### Features
+
+* **auth:** label the sign-in field as username or email ([#45](https://github.com/JorisJonkers-dev/auth-ui/issues/45)) ([6ba8ff7](https://github.com/JorisJonkers-dev/auth-ui/commit/6ba8ff7b9364275174d407e7f2f5f8873f869d40))
+
+
+### Bug Fixes
+
+* **auth:** report the status when a request is rejected without a body ([#43](https://github.com/JorisJonkers-dev/auth-ui/issues/43)) ([31b6c60](https://github.com/JorisJonkers-dev/auth-ui/commit/31b6c60c41761e758ef50f54dce547b73f65c367))
+
 ## [0.5.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.4.4...v0.5.0) (2026-09-19)
 
 
