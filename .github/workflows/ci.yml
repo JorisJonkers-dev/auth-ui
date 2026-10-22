@@ -31,7 +31,7 @@ jobs:
 
   web-check:
     name: Web Check
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@583993e5865cd5b8761fe52db5843130fb107c51 # v0.34.2
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@618d5851b22d2c46d4234deaa07e0f1950e2b65d # v0.34.3
     with:
       package-manager: pnpm
       install-command: pnpm install --no-frozen-lockfile
@@ -44,7 +44,7 @@ jobs:
 
   e2e:
     name: E2E
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@583993e5865cd5b8761fe52db5843130fb107c51 # v0.34.2
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@618d5851b22d2c46d4234deaa07e0f1950e2b65d # v0.34.3
     with:
       package-manager: pnpm
       install-command: pnpm install --no-frozen-lockfile
@@ -55,7 +55,7 @@ jobs:
 
   mutation:
     name: Mutation
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@583993e5865cd5b8761fe52db5843130fb107c51 # v0.34.2
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@618d5851b22d2c46d4234deaa07e0f1950e2b65d # v0.34.3
     with:
       package-manager: pnpm
       install-command: pnpm install --no-frozen-lockfile
