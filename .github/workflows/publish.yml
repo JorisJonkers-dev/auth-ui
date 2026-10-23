@@ -21,7 +21,7 @@ jobs:
   # Reusable workflow: consume its results via needs.<job>.outputs downstream;
   # a `uses:` job must not redeclare an outputs: block.
   publish-image:
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@618d5851b22d2c46d4234deaa07e0f1950e2b65d # v0.34.3
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@f2180a482b63756affde537233881fa12e65df70 # v0.35.0
     with:
       # Restored: adopting the shared publish flow dropped the inline
       # build-push-action's platforms value, so this fell back to the
@@ -108,7 +108,7 @@ jobs:
   # image-lock-artifact is the ONLY lock input passed across the boundary.
   publish-deploy-artifact:
     needs: [resolve-image-lock]
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-artifact.yml@618d5851b22d2c46d4234deaa07e0f1950e2b65d # v0.34.3
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-artifact.yml@f2180a482b63756affde537233881fa12e65df70 # v0.35.0
     with:
       ref: ${{ github.ref }}
       artifact-name: auth-ui
