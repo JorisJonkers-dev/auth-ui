@@ -12,7 +12,7 @@ spec:
       image: auth-ui
       health:
         path: /
-        port: 80
+        port: 8080
         timeoutClass: stateless
         mandatory: true
       rollbackTargetRetention:
