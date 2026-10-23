@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.6.0...v0.7.0) (2026-10-23)
+
+
+### Features
+
+* serve the sign-in UI from the unprivileged nginx on 8080 ([#57](https://github.com/JorisJonkers-dev/auth-ui/issues/57)) ([5d76c89](https://github.com/JorisJonkers-dev/auth-ui/commit/5d76c8970e377ca7172b43917f9d43cca55d95b8))
+
 ## [0.6.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.5.0...v0.6.0) (2026-09-21)
 
 
