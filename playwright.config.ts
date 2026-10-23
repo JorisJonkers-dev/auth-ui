@@ -5,7 +5,8 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   retries: 1,
-  reporter: 'html',
+  // CI writes one blob report per browser, which one job merges into a single HTML report.
+  reporter: process.env.CI ? [['blob'], ['list']] : 'html',
   use: {
     baseURL: 'http://localhost:5173',
     trace: 'on-first-retry',
