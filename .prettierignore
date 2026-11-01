@@ -8,4 +8,3 @@ reports
 .github-workflows/**
 pnpm-lock.yaml
 CHANGELOG.md
-PLATFORM.md
