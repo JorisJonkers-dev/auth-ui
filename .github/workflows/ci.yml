@@ -35,7 +35,7 @@ jobs:
 
   web-check:
     name: Web Check
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@f3bb6cabaa6ee33694f8632ce273a4e703d60780 # v0.38.0
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@281c848691bd87e83c3b9a185103270637355825 # v0.42.0
     with:
       package-manager: pnpm
       install-command: pnpm install --no-frozen-lockfile
@@ -154,7 +154,7 @@ jobs:
 
   mutation:
     name: Mutation
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@f3bb6cabaa6ee33694f8632ce273a4e703d60780 # v0.38.0
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@281c848691bd87e83c3b9a185103270637355825 # v0.42.0
     with:
       package-manager: pnpm
       install-command: pnpm install --no-frozen-lockfile
