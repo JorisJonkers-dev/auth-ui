@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   add-to-project:
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/add-to-project.yml@61b0640d46f1c043de20b435237cce6d7a15ce84 # main
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/add-to-project.yml@ab93bf1c435304c5933ab33f9febe087ff8be214 # main
     with:
       project-url: https://github.com/orgs/JorisJonkers-dev/projects/2
     secrets:
