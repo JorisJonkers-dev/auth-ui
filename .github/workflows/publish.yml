@@ -17,14 +17,17 @@ jobs:
   # Reusable workflow: consume its results via needs.<job>.outputs downstream;
   # a `uses:` job must not redeclare an outputs: block.
   publish-image:
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@ab93bf1c435304c5933ab33f9febe087ff8be214 # v0.43.0
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@f8f0a5ae583913de18143bbbbe0db9ecab970435 # v0.45.0
     with:
+      require-package-proxy: true
       # Restored: adopting the shared publish flow dropped the inline
       # build-push-action's platforms value, so this fell back to the
       # workflow's linux/amd64 default and the arm64 nodes could not pull.
       platforms: linux/amd64,linux/arm64
       image-name: auth-ui
       version: ${{ github.ref_name }}
+    secrets:
+      PACKAGES_PROXY_TOKEN: ${{ secrets.PACKAGES_PROXY_TOKEN }}
     permissions:
       contents: read
       packages: write
