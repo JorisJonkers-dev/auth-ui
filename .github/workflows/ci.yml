@@ -232,8 +232,9 @@ jobs:
             ${{ steps.proxy.outputs.enabled == 'true' && 'UV_DEFAULT_INDEX=https://packages.jorisjonkers.dev/pypi/simple/' || '' }}
           secrets: |
             github_token=${{ secrets.GITHUB_TOKEN }}
-            ${{ steps.proxy.outputs.enabled == 'true' && format('id=packages-netrc,src={0}', steps.proxy.outputs.netrc) || '' }}
-            ${{ steps.proxy.outputs.enabled == 'true' && format('id=packages-npmrc,src={0}', steps.proxy.outputs.npmrc) || '' }}
+          secret-files: |
+            ${{ steps.proxy.outputs.enabled == 'true' && format('packages-netrc={0}', steps.proxy.outputs.netrc) || '' }}
+            ${{ steps.proxy.outputs.enabled == 'true' && format('packages-npmrc={0}', steps.proxy.outputs.npmrc) || '' }}
 
   pipeline-complete:
     name: Pipeline Complete

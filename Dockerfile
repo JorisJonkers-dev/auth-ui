@@ -7,6 +7,7 @@ RUN --mount=type=secret,id=packages-npmrc,target=/run/secrets/packages-npmrc,req
     NPM_CONFIG_USERCONFIG=/run/secrets/packages-npmrc npm install -g pnpm@9.15.4
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=secret,id=packages-netrc,target=/run/secrets/packages-netrc,required=false ls -l /run/secrets/packages-netrc
 RUN --mount=type=secret,id=github_token \
     --mount=type=secret,id=packages-npmrc,target=/run/secrets/packages-npmrc,required=false \
     NODE_AUTH_TOKEN="$(cat /run/secrets/github_token 2>/dev/null || true)" \
