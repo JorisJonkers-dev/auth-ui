@@ -35,7 +35,7 @@ jobs:
 
   web-check:
     name: Web Check
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@f8f0a5ae583913de18143bbbbe0db9ecab970435 # v0.45.0
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@2814b76fc3f5bd4f02a6e4a0fa789f1307757daa # v0.45.4
     with:
       require-package-proxy: true
       package-manager: pnpm
@@ -88,7 +88,7 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
-      - uses: JorisJonkers-dev/github-workflows/actions/setup-package-proxy@f8f0a5ae583913de18143bbbbe0db9ecab970435 # v0.45.0
+      - uses: JorisJonkers-dev/github-workflows/actions/setup-package-proxy@2814b76fc3f5bd4f02a6e4a0fa789f1307757daa # v0.45.4
         with:
           token: ${{ secrets.PACKAGES_PROXY_TOKEN }}
           require-package-proxy: true
@@ -129,7 +129,7 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
-      - uses: JorisJonkers-dev/github-workflows/actions/setup-package-proxy@f8f0a5ae583913de18143bbbbe0db9ecab970435 # v0.45.0
+      - uses: JorisJonkers-dev/github-workflows/actions/setup-package-proxy@2814b76fc3f5bd4f02a6e4a0fa789f1307757daa # v0.45.4
         with:
           token: ${{ secrets.PACKAGES_PROXY_TOKEN }}
           require-package-proxy: true
@@ -166,7 +166,7 @@ jobs:
 
   mutation:
     name: Mutation
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@f8f0a5ae583913de18143bbbbe0db9ecab970435 # v0.45.0
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@2814b76fc3f5bd4f02a6e4a0fa789f1307757daa # v0.45.4
     with:
       require-package-proxy: true
       package-manager: pnpm
@@ -186,6 +186,39 @@ jobs:
 
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
+      - name: Write packages proxy netrc
+        id: proxy
+        shell: bash
+        env:
+          PACKAGES_PROXY_TOKEN: ${{ secrets.PACKAGES_PROXY_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "$PACKAGES_PROXY_TOKEN" ]; then
+            echo "::warning::PACKAGES_PROXY_TOKEN is not set; packages install without the proxy."
+            exit 0
+          fi
+
+          printf '::add-mask::%s\n' "$PACKAGES_PROXY_TOKEN"
+          umask 077
+          netrc="$RUNNER_TEMP/packages-netrc"
+          {
+            printf 'machine packages.jorisjonkers.dev\n'
+            printf 'login packages\n'
+            printf 'password %s\n' "$PACKAGES_PROXY_TOKEN"
+          } > "$netrc"
+          npmrc="$RUNNER_TEMP/packages-npmrc"
+          {
+            printf 'registry=https://packages.jorisjonkers.dev/npm/\n'
+            printf '//packages.jorisjonkers.dev/npm/:_authToken=%s\n' "$PACKAGES_PROXY_TOKEN"
+            printf '@jorisjonkers-dev:registry=https://npm.pkg.github.com\n'
+          } > "$npmrc"
+          {
+            printf 'netrc=%s\n' "$netrc"
+            printf 'npmrc=%s\n' "$npmrc"
+            printf 'enabled=true\n'
+          } >> "$GITHUB_OUTPUT"
+
       - name: Build image
         uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
@@ -193,8 +226,15 @@ jobs:
           file: Dockerfile
           push: false
           tags: 'ghcr.io/jorisjonkers-dev/auth-ui:ci-${{ github.sha }}'
+          build-args: |
+            ${{ steps.proxy.outputs.enabled == 'true' && 'GOPROXY=https://packages.jorisjonkers.dev/go' || '' }}
+            ${{ steps.proxy.outputs.enabled == 'true' && 'PIP_INDEX_URL=https://packages.jorisjonkers.dev/pypi/simple/' || '' }}
+            ${{ steps.proxy.outputs.enabled == 'true' && 'UV_DEFAULT_INDEX=https://packages.jorisjonkers.dev/pypi/simple/' || '' }}
           secrets: |
             github_token=${{ secrets.GITHUB_TOKEN }}
+          secret-files: |
+            ${{ steps.proxy.outputs.enabled == 'true' && format('packages-netrc={0}', steps.proxy.outputs.netrc) || '' }}
+            ${{ steps.proxy.outputs.enabled == 'true' && format('packages-npmrc={0}', steps.proxy.outputs.npmrc) || '' }}
 
   pipeline-complete:
     name: Pipeline Complete
