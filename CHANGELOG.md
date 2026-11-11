@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.7.0...v0.7.1) (2026-11-11)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([#51](https://github.com/JorisJonkers-dev/auth-ui/issues/51)) ([3d91ffb](https://github.com/JorisJonkers-dev/auth-ui/commit/3d91ffbb6017b573f7a1b26750dd3bf3d6b632c2))
+* **deps:** update minor and patch dependencies ([#54](https://github.com/JorisJonkers-dev/auth-ui/issues/54)) ([87d00d7](https://github.com/JorisJonkers-dev/auth-ui/commit/87d00d718c9b399cd95f95324b3dfe169270f5e3))
+
 ## [0.7.0](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.6.0...v0.7.0) (2026-10-23)
 
 
