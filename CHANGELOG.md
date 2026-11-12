@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.2](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.7.1...v0.7.2) (2026-11-12)
+
+
+### Bug Fixes
+
+* **deps:** update minor and patch dependencies ([#73](https://github.com/JorisJonkers-dev/auth-ui/issues/73)) ([e9f391d](https://github.com/JorisJonkers-dev/auth-ui/commit/e9f391dc852b133ce578a7b542be118f0a0c96ad))
+* **hygiene:** never cancel a run of the required hygiene checks ([#77](https://github.com/JorisJonkers-dev/auth-ui/issues/77)) ([5a80f46](https://github.com/JorisJonkers-dev/auth-ui/commit/5a80f4667a19cb43b963eef3c231fefd7c9e14ea))
+
 ## [0.7.1](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.7.0...v0.7.1) (2026-11-11)
 
 
