@@ -48,7 +48,7 @@ jobs:
       packages-token: '${{ secrets.GITHUB_TOKEN }}'
       PACKAGES_PROXY_TOKEN: '${{ secrets.PACKAGES_PROXY_TOKEN }}'
 
-  # The Playwright version the lockfile resolves, so the container below always carries the
+  # The Playwright version package.json pins, so the container below always carries the
   # browsers that version expects, also after Renovate bumps @playwright/test.
   e2e-version:
     name: Playwright version
@@ -63,8 +63,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          version="$(grep -m1 -E "^  '@playwright/test@[0-9]" pnpm-lock.yaml | sed -E "s/^  '@playwright\/test@([0-9][^']*)':.*/\1/")"
-          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "no @playwright/test version in pnpm-lock.yaml" >&2; exit 1; }
+          # The direct dependency's version, not the first @playwright/test entry in the lockfile: a
+          # dependency can pin an older copy, which sorts first and names the wrong browser image.
+          version="$(jq -r '.devDependencies["@playwright/test"] // empty' package.json)"
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "no pinned @playwright/test version in package.json" >&2; exit 1; }
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
   # One job per browser. The whole suite runs in under a minute, so a browser needs no further
