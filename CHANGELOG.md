@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.3](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.7.2...v0.7.3) (2026-11-19)
+
+
+### Bug Fixes
+
+* **docker:** build on nginx 1.31.9 from the nginx/nginx-unprivileged namespace ([#81](https://github.com/JorisJonkers-dev/auth-ui/issues/81)) ([08d43c4](https://github.com/JorisJonkers-dev/auth-ui/commit/08d43c41c3c1d24ad7fe67694bcf9eb7f2c34b9c))
+
 ## [0.7.2](https://github.com/JorisJonkers-dev/auth-ui/compare/v0.7.1...v0.7.2) (2026-11-12)
 
 
